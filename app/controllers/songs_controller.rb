@@ -36,12 +36,8 @@ class SongsController < ApplicationController
   patch '/songs/:slug' do
 
     @song = Song.find_by_slug(params[:slug])
-    if !params[:song][:name].empty?
-      @song.name = params[:song][:name]
-    end
-    if !params[:artist][:name].empty?
-      @song.artist.name = params[:artist][:name]
-    end
+    @song.name = params[:song][:name]
+    @song.artist.name = params[:artist][:name]
     genres = params[:genre][:name].map do |genre|
       Genre.find_by(:name => genre)
     end
