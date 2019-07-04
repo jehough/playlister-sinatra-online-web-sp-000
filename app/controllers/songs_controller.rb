@@ -38,7 +38,6 @@ class SongsController < ApplicationController
     @song = Song.find_by_slug(params[:slug])
     @song.name = params[:song][:name]
     @song.artist.name = params[:artist][:name]
-    @song.genres = []
     genres = params[:genre][:name].map do |genre|
       Genre.find_by(:name => genre)
     end
