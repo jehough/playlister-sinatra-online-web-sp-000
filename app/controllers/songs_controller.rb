@@ -40,12 +40,9 @@ class SongsController < ApplicationController
     @song = Song.find_by_slug(params[:slug])
     @song.name = params[:song][:name]
     @song.artist.name = params[:artist][:name]
-    if !params[:genre][:name].empty?
-      params[:genre][:name].each do |genre|
-        @song.genres << Genre.find_by(:name => genre)
-      end
+    genres = params[:genre][:name].map do |genre|
+      Genre.find_by(:name => genre)
     end
-    binding.pry
     flash[:message]= "Successfully updated song."
     redirect "/songs/#{song.slug}"
   end
