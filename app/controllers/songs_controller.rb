@@ -40,7 +40,6 @@ class SongsController < ApplicationController
     @song = Song.find_by_slug(params[:slug])
     @song.name = params[:song][:name]
     @song.artist.name = params[:artist][:name]
-    binding.pry
     if !params[:genre][:name].empty?
       params[:genre][:name].each do |genre|
         @song.genres << Genre.find_by(:name => genre)
