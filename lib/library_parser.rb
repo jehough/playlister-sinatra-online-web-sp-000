@@ -9,15 +9,9 @@ class LibraryParser
   end
 
   def parse_filename(filename)
-    artist_match = filename.match(/^(.*) -/)
-    song_match   = filename.match(/- (.*) \[/)
-    genre_match  = filename.match(/\[([^\]]*)\]/)
-
-    artist = artist_match && artist_match[1]
-    song   = song_match   && song_match[1]
-    genre  = genre_match  && genre_match[1]
-
-    [artist, song, genre]
+    filearr = filename.split(/ - |\[|\]./)
+    filearr.pop
+    filearr
   end
 
   def call
@@ -32,9 +26,9 @@ class LibraryParser
     genre = Genre.find_or_create_by(name: genre_name)
     artist = Artist.find_or_create_by(name: artist_name)
 
-    song.song_genres.build(genre: genre)
+    SongGenre.create(:song_id => song.id, :genre_id => genre.id)
     song.artist = artist
-    
+
     song.save
   end
 end
