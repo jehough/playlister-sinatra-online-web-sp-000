@@ -35,12 +35,12 @@ class SongsController < ApplicationController
 
   patch '/songs/:slug' do
     if !params[:genres].keys.include?("names")
-      params[:genres][:names]=[]
+      params[:genres][:name]=[]
     end
-    song = Song.find_by_slug(params[:slug])
-    song.name = params[:song][:name]
-    song.artist.name = params[:artist][:name]
-    song.genres
+    @song = Song.find_by_slug(params[:slug])
+    @song.name = params[:song][:name]
+    @song.artist.name = params[:artist][:name]
+    if !params[:genres][:name]
 
     redirect "/songs/#{song.slug}"
   end
