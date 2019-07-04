@@ -1,4 +1,5 @@
 require 'pry'
+require 'rack-flash'
 class SongsController < ApplicationController
   register Rack::Flash
 
