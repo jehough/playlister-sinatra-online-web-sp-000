@@ -34,7 +34,7 @@ class SongsController < ApplicationController
   end
 
   patch '/songs/:slug' do
-    if !params[:genres].keys.include?("names")
+    if !params[:genres].keys.include?("name")
       params[:genres][:name]=[]
     end
     @song = Song.find_by_slug(params[:slug])
